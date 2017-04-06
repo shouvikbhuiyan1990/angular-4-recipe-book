@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success">
+      New recipe
+    </button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#" class="list-group-item clearfix" *ngFor="let recipe of recipes"  (click)="recipeItemClick(recipe)">
+      <rb-recipe-item [recipeData]="recipe"></rb-recipe-item>
+    </a>
+  </div>
+</div>

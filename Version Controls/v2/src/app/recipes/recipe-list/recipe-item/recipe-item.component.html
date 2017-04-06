@@ -1,0 +1,17 @@
+<a href="#" class="list-group-item clearfix" 
+    *ngFor="let recipe of recipeDatas;" 
+    (click)="getCurrentRecipe(recipe)" >
+  <div class="pull-left">
+      <div class="description-body">
+        <h4 class="list-group-item-heading">
+          {{recipe.name}}
+        </h4>
+        <div class="list-group-item-text">
+          <p>{{recipe.description}}</p>
+        </div>
+      </div>
+  </div>
+  <div class="pull-right">
+    <img class="img-responsive" [src]="recipe.imagePath" style="max-height: 50px" alt="Recipe Image">
+  </div>
+</a>

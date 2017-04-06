@@ -1,0 +1,9 @@
+<rb-header (headerClicked)="headerClicked($event)"></rb-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <rb-recipes *ngIf="navStatus == 'recipe'"></rb-recipes>
+      <rb-shopping-list *ngIf="navStatus == 'shopping'"></rb-shopping-list>
+    </div>
+  </div>
+</div>
