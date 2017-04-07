@@ -1,7 +1,6 @@
 import { Component, OnInit,ViewChild,Output,EventEmitter,ElementRef } from '@angular/core';
 
 import {Ingrediant} from '../../shared/ingrediant.model';
-import {NgModel,NgForm} from '@angular/forms';
 
 import {ShoppingListService} from '../../shared/shopping-list.service';
 
@@ -12,9 +11,8 @@ import {ShoppingListService} from '../../shared/shopping-list.service';
 })
 export class ShoppingEditComponent implements OnInit {
 
-  @ViewChild('ingrediantName') name:NgModel;
-  @ViewChild('ingrediantAmount') amount:NgModel;
-  @ViewChild('f') currentForm :  NgForm;
+  @ViewChild('ingrediantName') name:ElementRef;
+  @ViewChild('ingrediantAmount') amount:ElementRef;
 
   @Output() ingrediantAdded = new EventEmitter<Ingrediant>();
   constructor( private shoppingListService : ShoppingListService) { }
@@ -22,13 +20,8 @@ export class ShoppingEditComponent implements OnInit {
   ngOnInit() {
   }
   addIngrediant(){
-      this.shoppingListService.addIngrediants(new Ingrediant(this.name.value,this.amount.value));
-      this.currentForm.reset();
-      // this.shoppingListService.addIngrediants(new Ingrediant(this.name.nativeElement.value,this.amount.nativeElement.value))
+      this.shoppingListService.addIngrediants(new Ingrediant(this.name.nativeElement.value,this.amount.nativeElement.value))
       //this.ingrediantAdded.emit(new Ingrediant(this.name.nativeElement.value,this.amount.nativeElement.value));
-  }
-  clearForm(){
-    this.currentForm.reset();
   }
 
 }

@@ -1,0 +1,36 @@
+<div>
+  <div class="row">
+    <div class="col-xs-12">
+      <img [src]="recipeDetails?.imagePath" alt="Recipe Details Image" class="img-responsive" style="max-height: 240px;">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>{{recipeDetails?.name}}</h1>
+    </div>
+    <div class="col-xs-12">
+      <div class="btn-group" rbDropdowndir>
+        <button type="button" class="btn btn-primary dropdown-toggle">
+          Manage Recipe <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a (click)="exportToShoppingList(recipeDetails.ingrediants)">To Shopping List</a></li>
+          <li><a (click)="NavigatetoEdit()" >Edit</a></li>
+          <li><a>Delete</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>{{recipeDetails?.description}}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let item of recipeDetails.ingrediants">{{item.name}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
