@@ -52,7 +52,8 @@ const appRoutes :  Routes = [
   },
   { 
     path : 'shopping' , 
-    component : ShoppingListComponent },
+    component : ShoppingListComponent
+  },
   { 
     path : 'not-found', 
     component : NotFoundComponent },

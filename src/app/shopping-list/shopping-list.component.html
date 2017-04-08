@@ -3,7 +3,7 @@
     <rb-shopping-edit></rb-shopping-edit>
     <hr>
     <ul class="list-group">
-      <a *ngFor = "let ingrediant of ingrediants"
+      <a *ngFor = "let ingrediant of ingrediants; let i = index" (click)="selectIngrediant(i)"
        class="list-group-item" style="cursor: pointer">
        {{ingrediant.name}} ({{ingrediant.amount}})
       </a>
