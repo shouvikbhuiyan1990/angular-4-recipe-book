@@ -16,6 +16,7 @@ import {ShoppingListService} from '../../shared/shopping-list.service';
 })
 export class RecipeDetailComponent implements OnInit {
   recipeDetails: Recipe;
+  currentID : number;
 
   constructor( private recipeService :  RecipeService,  
                private shoppingListService : ShoppingListService, 
@@ -32,7 +33,7 @@ export class RecipeDetailComponent implements OnInit {
     this.crouter.params.subscribe(
       (data : Params)=>{
         this.recipeDetails = this.recipeService.getRecipeById(data['id']);
-        
+        this.currentID = +data['id']; //prepend + to convert string to number
       }
     );
   }
@@ -41,6 +42,11 @@ export class RecipeDetailComponent implements OnInit {
     //this.recipeService.getRecipeDetails.next(this.recipeDetails);
     this.route.navigate(['edit'], {relativeTo : this.crouter});
     
+  }
+
+  DeleteRecipe(){
+    this.recipeService.deleteRecipe(this.currentID);
+    this.route.navigate(['../../'], {relativeTo : this.crouter});
   }
 
   exportToShoppingList( ingrediants :Ingrediant[] ){

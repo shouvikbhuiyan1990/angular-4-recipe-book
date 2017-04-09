@@ -31,9 +31,12 @@ export class RecipeService{
     updateRecipe( index, currentValue:Recipe ){
         this.recipeData[index] = currentValue;
         this.recipeDatahasChanged.next( this.recipeData );
-        console.log(this.recipeData.slice())
     }
 
+    deleteRecipe(index:number){
+        this.recipeData.splice(index,1);
+        this.recipeDatahasChanged.next( this.recipeData );
+    }
     getRecipeById(id){
         return this.recipeData[id];
     }
