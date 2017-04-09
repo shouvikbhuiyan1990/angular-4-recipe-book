@@ -34,16 +34,32 @@
                   />
         </div>
       </div>
-      <!--<div class="row">
-        <div class="form-group col-sm-5">
-          <label for="amount">Ingrediants</label>
-          <input type="text" 
+      <div class="row">
+        <label for="amount" style="display: block">Ingrediants</label>
+        <button class="btn btn-primary" style="display: block" type="button" (click)="addMoreIngrediants()">Add More Ingrediants</button>
+        <div class="form-group col-sm-8" formArrayName="ingrediants">
+          <div class="row" *ngFor="let control of EditRecipeForm.get('ingrediants').controls; let i = index"
+            [formGroupName]="i">
+            <div class="col-sm-8">
+              <input type="text" 
                   class="form-control" 
-                  name="ingrediantAmount"
-                  id="amount"
+                  name="name"
+                  formControlName="name"
                   />
+            </div>
+             <div class="col-sm-2">
+              <input type="text" 
+                  class="form-control" 
+                  name="amount"
+                  formControlName="amount"
+                  />
+            </div>
+             <div class="col-sm-2">
+              <button class="btn btn-danger" type="button" >X</button>
+            </div>
+          </div>
         </div>
-      </div>-->
+      </div>
       <div class="row">
         <div class="col-xs-12">
           <button type="submit" class="btn btn-success" >

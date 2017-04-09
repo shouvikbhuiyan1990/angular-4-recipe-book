@@ -1,5 +1,5 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
-import { FormsModule,FormGroup,FormControl,Validators } from '@angular/forms';
+import { FormsModule,FormGroup,FormControl,Validators,FormArray } from '@angular/forms';
 
 import { Recipe } from '../recipe.model';
 
@@ -30,6 +30,20 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
         this.isEditable = this.id != null;
       }
     );
+    this.currentRecipe = this.recipeService.getRecipeById(this.id);
+    let recipeingrediant = new FormArray([]);
+
+    if( this.currentRecipe.ingrediants.length>0 ){
+      for( let ingrediant of this.currentRecipe.ingrediants ){
+        recipeingrediant.push(
+          new FormGroup({
+            'name' : new FormControl(ingrediant.name),
+            'amount' : new FormControl(ingrediant.amount)
+          }
+          )
+        )
+      }
+    }
 
     /***** Alternate Approach */
     // this.currentRecipe = this.recipeService.getRecipeById(this.id);
@@ -51,16 +65,15 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
     //     })
     //   }
     // )
-
     this.EditRecipeForm = new FormGroup({
       name : new FormControl(null),
       description :  new FormControl(null),
-      imagepath : new FormControl(null)
+      imagepath : new FormControl(null),
+      ingrediants : recipeingrediant
     });
     
     if( this.isEditable ){
-      this.currentRecipe = this.recipeService.getRecipeById(this.id);
-      this.EditRecipeForm.setValue({
+      this.EditRecipeForm.patchValue({
           name : this.currentRecipe.name,
           description :  this.currentRecipe.description,
           imagepath : this.currentRecipe.imagePath
@@ -69,13 +82,21 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
   }
 
   AddModifyRecipe(){
-    const newRecipe : Recipe = new Recipe( this.EditRecipeForm.get('name').value, this.EditRecipeForm.get('description').value, this.EditRecipeForm.get('imagepath').value,[] );
+    const newRecipe : Recipe = new Recipe( this.EditRecipeForm.get('name').value, 
+                                           this.EditRecipeForm.get('description').value, 
+                                           this.EditRecipeForm.get('imagepath').value,
+                                           this.EditRecipeForm.get('ingrediants').value );
     if( !this.isEditable ){
       this.recipeService.addNewRecipe(newRecipe);
     }else{
       this.recipeService.updateRecipe(this.id, newRecipe);
       this.router.navigate(['../'],{ relativeTo : this.route })
     }
+  }
+
+  addMoreIngrediants(){
+    (<FormArray>this.EditRecipeForm.get('ingrediants')).
+    push(new FormGroup({ 'name' : new FormControl(null), 'amount' : new FormControl(null) }));
   }
 
   ngOnDestroy(){
