@@ -17,6 +17,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdowndirDirective } from './shared/dropdowndir.directive';
 
 import {ShoppingListService} from './shared/shopping-list.service';
+import {RecipeService} from './shared/recipe.service'
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NoRecipeSelectedComponent } from './recipes/recipe-detail/no-recipe-selected/no-recipe-selected.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
@@ -86,7 +87,7 @@ const appRoutes :  Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService,RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

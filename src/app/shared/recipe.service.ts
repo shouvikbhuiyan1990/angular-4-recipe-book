@@ -6,7 +6,8 @@ import {Recipe} from '../recipes/recipe.model';
 import {Ingrediant} from './ingrediant.model';
 
 export class RecipeService{
-    selectedRecipe =  new EventEmitter<Recipe>();
+    // selectedRecipe =  new EventEmitter<Recipe>();
+    recipeDatahasChanged = new Subject<Recipe[]>();
 
    // getRecipeDetails =  new Subject<Recipe>();
 
@@ -18,8 +19,19 @@ export class RecipeService{
         ];
 
     getRecipe(){
-        return this.recipeData.slice(); //returns a copy of the array as array is reference type in JS and returning it 
+        return this.recipeData; //returns a copy of the array as array is reference type in JS and returning it 
                                         //directly would give away a chance to manipulate the original values
+    }
+
+    addNewRecipe( recipenew : Recipe ){
+        this.recipeData.push(recipenew);
+        this.recipeDatahasChanged.next( this.recipeData );
+    }
+
+    updateRecipe( index, currentValue:Recipe ){
+        this.recipeData[index] = currentValue;
+        this.recipeDatahasChanged.next( this.recipeData );
+        console.log(this.recipeData.slice())
     }
 
     getRecipeById(id){

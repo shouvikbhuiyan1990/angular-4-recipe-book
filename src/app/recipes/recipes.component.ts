@@ -8,7 +8,7 @@ import {RecipeService} from '../shared/recipe.service'
   selector: 'rb-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css'],
-  providers :  [RecipeService]
+  //providers :  [RecipeService]
 })
 export class RecipesComponent implements OnInit {
 

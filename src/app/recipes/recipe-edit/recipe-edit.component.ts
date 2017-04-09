@@ -3,7 +3,7 @@ import { FormsModule,FormGroup,FormControl,Validators } from '@angular/forms';
 
 import { Recipe } from '../recipe.model';
 
-import {ActivatedRoute,Params} from '@angular/router';
+import {ActivatedRoute,Params,Router} from '@angular/router';
 import { RecipeService } from '../../shared/recipe.service';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -21,7 +21,7 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
   EditRecipeForm : FormGroup;
   EditRecipeFormSbs: Subscription;
 
-  constructor( private route : ActivatedRoute, private recipeService : RecipeService  ) { }
+  constructor( private route : ActivatedRoute, private recipeService : RecipeService,private router : Router  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -30,11 +30,6 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
         this.isEditable = this.id != null;
       }
     );
-    // this.EditRecipeForm = new FormGroup({
-    //   name : new FormControl(null,[Validators.required ]),
-    //   description :  new FormControl(null),
-    //   imagepath : new FormControl(null)
-    // });
 
     /***** Alternate Approach */
     // this.currentRecipe = this.recipeService.getRecipeById(this.id);
@@ -63,21 +58,28 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
       imagepath : new FormControl(null)
     });
     
-    this.currentRecipe = this.recipeService.getRecipeById(this.id);
-    this.EditRecipeForm.setValue({
+    if( this.isEditable ){
+      this.currentRecipe = this.recipeService.getRecipeById(this.id);
+      this.EditRecipeForm.setValue({
           name : this.currentRecipe.name,
           description :  this.currentRecipe.description,
           imagepath : this.currentRecipe.imagePath
-    })
+      })
+    }
+  }
+
+  AddModifyRecipe(){
+    const newRecipe : Recipe = new Recipe( this.EditRecipeForm.get('name').value, this.EditRecipeForm.get('description').value, this.EditRecipeForm.get('imagepath').value,[] );
+    if( !this.isEditable ){
+      this.recipeService.addNewRecipe(newRecipe);
+    }else{
+      this.recipeService.updateRecipe(this.id, newRecipe);
+      this.router.navigate(['../'],{ relativeTo : this.route })
+    }
   }
 
   ngOnDestroy(){
    // this.EditRecipeFormSbs.unsubscribe();
-  }
-
-  createNewForm(){
-    
-    
   }
 
 }

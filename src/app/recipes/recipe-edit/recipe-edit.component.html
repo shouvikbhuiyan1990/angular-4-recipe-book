@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <form [formGroup]= "EditRecipeForm">
+    <form [formGroup]= "EditRecipeForm" (ngSubmit)="AddModifyRecipe()">
       <div class="row">
         <div class="form-group col-sm-5">
           <label for="name">Name</label>
@@ -47,7 +47,7 @@
       <div class="row">
         <div class="col-xs-12">
           <button type="submit" class="btn btn-success" >
-            Save
+            {{ !isEditable ? 'Add New'  : 'Update' }}
           </button>
           <button type="button" class="btn btn-danger" routerLink="../">
             Cancel
