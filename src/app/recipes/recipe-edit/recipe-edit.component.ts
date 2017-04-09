@@ -30,20 +30,22 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
         this.isEditable = this.id != null;
       }
     );
-    this.currentRecipe = this.recipeService.getRecipeById(this.id);
     let recipeingrediant = new FormArray([]);
-
-    if( this.currentRecipe.ingrediants.length>0 ){
-      for( let ingrediant of this.currentRecipe.ingrediants ){
-        recipeingrediant.push(
-          new FormGroup({
-            'name' : new FormControl(ingrediant.name),
-            'amount' : new FormControl(ingrediant.amount)
-          }
+    if( this.isEditable ){
+      this.currentRecipe = this.recipeService.getRecipeById(this.id);
+      if( this.currentRecipe.ingrediants.length>0 ){
+        for( let ingrediant of this.currentRecipe.ingrediants ){
+          recipeingrediant.push(
+            new FormGroup({
+              'name' : new FormControl(ingrediant.name),
+              'amount' : new FormControl(ingrediant.amount)
+            }
+            )
           )
-        )
+        }
       }
     }
+    
 
     /***** Alternate Approach */
     // this.currentRecipe = this.recipeService.getRecipeById(this.id);
