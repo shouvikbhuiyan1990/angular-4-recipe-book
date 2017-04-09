@@ -86,6 +86,7 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
                                            this.EditRecipeForm.get('description').value, 
                                            this.EditRecipeForm.get('imagepath').value,
                                            this.EditRecipeForm.get('ingrediants').value );
+    //debugger
     if( !this.isEditable ){
       this.recipeService.addNewRecipe(newRecipe);
     }else{
@@ -97,6 +98,11 @@ export class RecipeEditComponent implements OnInit,OnDestroy {
   addMoreIngrediants(){
     (<FormArray>this.EditRecipeForm.get('ingrediants')).
     push(new FormGroup({ 'name' : new FormControl(null), 'amount' : new FormControl(null) }));
+  }
+
+  deleteIngrediant(index){
+   (this.EditRecipeForm.get('ingrediants')['controls']).splice(index,1);
+   (this.EditRecipeForm.get('ingrediants')['value']).splice(index,1);
   }
 
   ngOnDestroy(){
