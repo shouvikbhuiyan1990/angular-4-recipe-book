@@ -32,12 +32,15 @@ export class RecipeDetailComponent implements OnInit {
     this.crouter.params.subscribe(
       (data : Params)=>{
         this.recipeDetails = this.recipeService.getRecipeById(data['id']);
+        
       }
-    )
+    );
   }
 
   NavigatetoEdit(){
+    //this.recipeService.getRecipeDetails.next(this.recipeDetails);
     this.route.navigate(['edit'], {relativeTo : this.crouter});
+    
   }
 
   exportToShoppingList( ingrediants :Ingrediant[] ){

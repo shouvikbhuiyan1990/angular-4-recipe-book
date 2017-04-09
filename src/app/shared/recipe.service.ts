@@ -1,4 +1,5 @@
 import {EventEmitter} from '@angular/core';
+import {Subject} from 'rxjs/Subject'
 
 import {Recipe} from '../recipes/recipe.model';
 
@@ -6,6 +7,8 @@ import {Ingrediant} from './ingrediant.model';
 
 export class RecipeService{
     selectedRecipe =  new EventEmitter<Recipe>();
+
+   // getRecipeDetails =  new Subject<Recipe>();
 
     private recipeData:Recipe[] = [
         new Recipe('Chicken Tikka','A delicious indian cuisine','https://i.ytimg.com/vi/NeQxq3UGhLc/maxresdefault.jpg'

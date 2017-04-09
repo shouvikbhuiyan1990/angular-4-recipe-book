@@ -1,3 +1,59 @@
-<p>
-  recipe-edit works!
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]= "EditRecipeForm">
+      <div class="row">
+        <div class="form-group col-sm-5">
+          <label for="name">Name</label>
+          <input type="text" 
+                  class="form-control" 
+                  id="name"
+                  name="name"
+                  formControlName = "name"
+                  />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-5">
+          <label for="description">Description</label>
+          <input type="text" 
+                  class="form-control" 
+                  name="description"
+                  id="description"
+                  formControlName = "description"
+                  />
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-5">
+          <label for="imagepath">Image Path</label>
+          <input type="text" 
+                  class="form-control" 
+                  name="imagepath"
+                  id="imagepath"
+                  formControlName = "imagepath"
+                  />
+        </div>
+      </div>
+      <!--<div class="row">
+        <div class="form-group col-sm-5">
+          <label for="amount">Ingrediants</label>
+          <input type="text" 
+                  class="form-control" 
+                  name="ingrediantAmount"
+                  id="amount"
+                  />
+        </div>
+      </div>-->
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success" >
+            Save
+          </button>
+          <button type="button" class="btn btn-danger" routerLink="../">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
